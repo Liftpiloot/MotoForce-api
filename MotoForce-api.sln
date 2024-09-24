@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{476080B2-44B2-432E-BCE0-DA1C60FD8320}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MotoForce-api", "MotoForce-api\MotoForce-api.csproj", "{697CAFB7-58FB-4A9F-87A1-895F4AA69724}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface", "Interface\Interface.csproj", "{3F251A18-531A-4F90-B30E-98D34BEEB5F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "Logic\Logic.csproj", "{DA732F40-49AD-4F4E-B739-8B0774F55C31}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{476080B2-44B2-432E-BCE0-DA1C60FD8320}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{476080B2-44B2-432E-BCE0-DA1C60FD8320}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{476080B2-44B2-432E-BCE0-DA1C60FD8320}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{476080B2-44B2-432E-BCE0-DA1C60FD8320}.Release|Any CPU.Build.0 = Release|Any CPU
+		{697CAFB7-58FB-4A9F-87A1-895F4AA69724}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{697CAFB7-58FB-4A9F-87A1-895F4AA69724}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{697CAFB7-58FB-4A9F-87A1-895F4AA69724}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{697CAFB7-58FB-4A9F-87A1-895F4AA69724}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F251A18-531A-4F90-B30E-98D34BEEB5F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F251A18-531A-4F90-B30E-98D34BEEB5F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F251A18-531A-4F90-B30E-98D34BEEB5F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F251A18-531A-4F90-B30E-98D34BEEB5F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA732F40-49AD-4F4E-B739-8B0774F55C31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA732F40-49AD-4F4E-B739-8B0774F55C31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA732F40-49AD-4F4E-B739-8B0774F55C31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA732F40-49AD-4F4E-B739-8B0774F55C31}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
