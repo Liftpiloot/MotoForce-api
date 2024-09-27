@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace Interface.Models;
 
-namespace DataAccess.Entities;
-
-public partial class User
+public partial class UserModel
 {
     public int Id { get; set; }
 
@@ -15,5 +12,5 @@ public partial class User
 
     public string? ProfilePic { get; set; }
 
-    public virtual ICollection<Route> Routes { get; set; } = new List<Route>();
+    public virtual ICollection<RouteModel> Routes { get; set; } = new List<RouteModel>();
 }

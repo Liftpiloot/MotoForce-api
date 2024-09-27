@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace Interface.Models;
 
-namespace DataAccess.Entities;
-
-public partial class DataPoint
+public partial class DataPointModel
 {
     public int Id { get; set; }
 
@@ -23,5 +20,5 @@ public partial class DataPoint
 
     public double? Speed { get; set; }
 
-    public virtual Route Route { get; set; } = null!;
+    public virtual RouteModel RouteModel { get; set; } = null!;
 }

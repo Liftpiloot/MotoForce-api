@@ -7,10 +7,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Classes\" />
       <Folder Include="Containers\" />
-      <Folder Include="Factories\" />
-      <Folder Include="Handlers\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Interface\Interface.csproj" />
     </ItemGroup>
 
 </Project>

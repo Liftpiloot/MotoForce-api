@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using DataAccess.Entities;
+using Interface.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Context;
@@ -16,19 +16,18 @@ public partial class MyDbContext : DbContext
     {
     }
 
-    public virtual DbSet<DataPoint> DataPoints { get; set; }
+    public virtual DbSet<DataPointModel> DataPoints { get; set; }
 
-    public virtual DbSet<Route> Routes { get; set; }
+    public virtual DbSet<RouteModel> Routes { get; set; }
 
-    public virtual DbSet<User> Users { get; set; }
+    public virtual DbSet<UserModel> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=mssqlstud.fhict.local;Database=dbi538068_MotoForce;User Id=dbi538068_MotoForce;Password=Dungprotfi8;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<DataPoint>(entity =>
+        modelBuilder.Entity<DataPointModel>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__data_poi__3213E83F105D1AAB");
 
@@ -46,13 +45,13 @@ public partial class MyDbContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("timestamp");
 
-            entity.HasOne(d => d.Route).WithMany(p => p.DataPoints)
+            entity.HasOne(d => d.RouteModel).WithMany(p => p.DataPoints)
                 .HasForeignKey(d => d.RouteId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_route_data_point");
         });
 
-        modelBuilder.Entity<Route>(entity =>
+        modelBuilder.Entity<RouteModel>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__route__3213E83F0D1943D9");
 
@@ -62,13 +61,13 @@ public partial class MyDbContext : DbContext
             entity.Property(e => e.Distance).HasColumnName("distance");
             entity.Property(e => e.UserId).HasColumnName("user_id");
 
-            entity.HasOne(d => d.User).WithMany(p => p.Routes)
+            entity.HasOne(d => d.UserModel).WithMany(p => p.Routes)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_user_route");
         });
 
-        modelBuilder.Entity<User>(entity =>
+        modelBuilder.Entity<UserModel>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__user__3213E83FDD5C49D0");
 
