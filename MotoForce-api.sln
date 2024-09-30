@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface", "Interface\Inte
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "Logic\Logic.csproj", "{DA732F40-49AD-4F4E-B739-8B0774F55C31}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MotoForce-Tests", "MotoForce-Tests\MotoForce-Tests.csproj", "{C0163E7A-61F8-43E4-A363-5CFF981C2595}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{DA732F40-49AD-4F4E-B739-8B0774F55C31}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA732F40-49AD-4F4E-B739-8B0774F55C31}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA732F40-49AD-4F4E-B739-8B0774F55C31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0163E7A-61F8-43E4-A363-5CFF981C2595}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0163E7A-61F8-43E4-A363-5CFF981C2595}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0163E7A-61F8-43E4-A363-5CFF981C2595}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0163E7A-61F8-43E4-A363-5CFF981C2595}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
