@@ -14,11 +14,10 @@ public class UserDal(MyDbContext context) : IUserDal
         return context.Users.ToList();
     }
 
-    public bool Register(UserModel userModel)
+    public void Register(UserModel userModel)
     {
         context.Users.Add(userModel);
         context.SaveChanges();
-        return true;
     }
     
     public bool UserNameExists(string userName)
