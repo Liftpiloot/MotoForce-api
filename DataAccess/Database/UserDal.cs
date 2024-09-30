@@ -13,4 +13,21 @@ public class UserDal(MyDbContext context) : IUserDal
         Debug.WriteLine(context.Database.GetDbConnection().ConnectionString);
         return context.Users.ToList();
     }
+
+    public bool Register(UserModel userModel)
+    {
+        context.Users.Add(userModel);
+        context.SaveChanges();
+        return true;
+    }
+    
+    public bool UserNameExists(string userName)
+    {
+        return context.Users.Any(u => u.Name == userName);
+    }
+    
+    public bool EmailExists(string email)
+    {
+        return context.Users.Any(u => u.Email == email);
+    }
 }
