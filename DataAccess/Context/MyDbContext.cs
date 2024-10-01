@@ -86,6 +86,9 @@ public partial class MyDbContext : DbContext
                 .HasMaxLength(256)
                 .HasColumnName("password");
             entity.Property(e => e.ProfilePic).HasColumnName("profile_pic");
+            entity.Property(e => e.EmailToken)
+                .HasColumnName("emailToken");
+            entity.Property(e => e.IsEmailVerified).HasColumnName("IsEmailVerified");
         });
 
         OnModelCreatingPartial(modelBuilder);
