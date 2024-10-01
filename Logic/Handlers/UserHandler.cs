@@ -22,4 +22,9 @@ public class UserHandler(IUserDal userDal) : IUserHandler
         UserContainer userContainer = new UserContainer(userDal);
         userContainer.Register(userModel);
     }
+
+    public UserModel? Login(string identifier)
+    {
+        return userDal.Login(identifier);
+    }
 }

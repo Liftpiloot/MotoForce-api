@@ -56,4 +56,29 @@ public class UserController(ILogicFactoryBuilder logicFactoryBuilder) : Controll
             return StatusCode(500, new { message = e.Message });
         }
     }
+    
+    // login
+    [HttpGet]
+    [Route("/Login")]
+    public IActionResult Login(string identifier, string password)
+    {
+        if (string.IsNullOrEmpty(identifier) || string.IsNullOrEmpty(password))
+        {
+            return BadRequest("Identifier or password is empty");
+        }
+        try
+        {
+            UserModel? user = _userHandler.Login(identifier);
+            if (user != null && BCrypt.Net.BCrypt.Verify(password, user.Password))
+            {
+                return Ok(user);
+            }
+            return NotFound("User not found or password incorrect");
+        }
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
+    }
+    
 }
