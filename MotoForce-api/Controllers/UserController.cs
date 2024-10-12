@@ -77,7 +77,7 @@ public class UserController(ILogicFactoryBuilder logicFactoryBuilder) : Controll
         }
         catch (Exception e)
         {
-            return NotFound(e.Message);
+            return StatusCode(500, new { message = e.Message });
         }
     }
     
