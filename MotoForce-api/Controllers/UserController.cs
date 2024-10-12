@@ -60,7 +60,7 @@ public class UserController(ILogicFactoryBuilder logicFactoryBuilder) : Controll
     // login
     [HttpGet]
     [Route("/Login")]
-    public IActionResult Login(string identifier, string password)
+    public async Task<IActionResult> Login(string identifier, string password)
     {
         if (string.IsNullOrEmpty(identifier) || string.IsNullOrEmpty(password))
         {
@@ -68,7 +68,7 @@ public class UserController(ILogicFactoryBuilder logicFactoryBuilder) : Controll
         }
         try
         {
-            UserModel? user = _userHandler.Login(identifier);
+            UserModel? user = await _userHandler.Login(identifier);
             if (user != null && BCrypt.Net.BCrypt.Verify(password, user.Password))
             {
                 return Ok(user);

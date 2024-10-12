@@ -30,10 +30,9 @@ public class UserDal(MyDbContext context) : IUserDal
         return context.Users.Any(u => u.Email == email);
     }
 
-    public UserModel? Login(string identifier)
+    public async Task<UserModel?> Login(string identifier)
     {
-        // return user where name or email is equal to identifier and password is equal to password
-        return context.Users.FirstOrDefault(u =>
-            u.Name == identifier || u.Email == identifier);
+        // return user where name or email is equal to identifier
+        return await context.Users.FirstOrDefaultAsync(u => u.Name == identifier || u.Email == identifier);
     }
 }

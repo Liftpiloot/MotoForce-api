@@ -8,5 +8,5 @@ public interface IUserDal
     public void Register(UserModel userModel);
     public bool UserNameExists(string userName);
     public bool EmailExists(string email);
-    public UserModel? Login(string identifier);
+    public Task<UserModel?> Login(string identifier);
 }

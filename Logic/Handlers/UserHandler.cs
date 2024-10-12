@@ -23,8 +23,8 @@ public class UserHandler(IUserDal userDal) : IUserHandler
         userContainer.Register(userModel);
     }
 
-    public UserModel? Login(string identifier)
+    public async Task<UserModel?> Login(string identifier)
     {
-        return userDal.Login(identifier);
+        return await userDal.Login(identifier);
     }
 }
