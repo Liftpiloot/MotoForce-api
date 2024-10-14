@@ -11,4 +11,9 @@ public class DalFactory(MyDbContext context) : IDalFactory
     {
         return new UserDal(context);
     }
+
+    public IRouteDal GetRouteDal()
+    {
+        return new RouteDal(context);
+    }
 }

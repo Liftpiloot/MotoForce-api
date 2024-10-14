@@ -5,4 +5,5 @@ namespace Interface.Factories;
 public interface IDalFactory
 {
     public IUserDal GetUserDal();
+    public IRouteDal GetRouteDal();
 }

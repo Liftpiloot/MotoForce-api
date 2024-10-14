@@ -10,4 +10,9 @@ public class HandlerFactory(IDalFactory dalFactory) : IHandlerFactory
     {
         return new UserHandler(dalFactory.GetUserDal());
     }
+
+    public IRouteHandler GetRouteHandler()
+    {
+        return new RouteHandler(dalFactory.GetRouteDal());
+    }
 }
