@@ -6,9 +6,9 @@ namespace Logic.Handlers;
 
 public class RouteHandler(IRouteDal routeDal) : IRouteHandler
 {
-    public async Task<int> CreateRoute(RouteModel route)
+    public async Task<int> CreateRoute(int userId)
     {
-        return await routeDal.CreateRoute(route);
+        return await routeDal.CreateRoute(userId);
     }
 
     public async Task CreateDataPoints(DataPointModel[] dataPoints)

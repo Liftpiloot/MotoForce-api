@@ -16,11 +16,11 @@ public class RouteController(ILogicFactoryBuilder logicFactoryBuilder) : Control
     
     [HttpPost]
     [Route("postRoute")]
-    public async Task<IActionResult> PostRoute([FromBody] RouteModel route)
+    public async Task<IActionResult> PostRoute(int userId)
     {
         try
         {
-            int routeId = await _routeHandler.CreateRoute(route);
+            int routeId = await _routeHandler.CreateRoute(userId);
             return Ok(new{RouteId = routeId});
         }
         catch (Exception e)
@@ -31,7 +31,7 @@ public class RouteController(ILogicFactoryBuilder logicFactoryBuilder) : Control
     
     [HttpPost]
     [Route("postDataPoints")]
-    public async Task<IActionResult> PostDataPoint([FromBody] DataPointModel[] dataPoints)
+    public async Task<IActionResult> PostDataPoint(DataPointModel[] dataPoints)
     {
         try
         {

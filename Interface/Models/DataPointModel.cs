@@ -1,4 +1,6 @@
-﻿namespace Interface.Models;
+﻿using System.Text.Json.Serialization;
+
+namespace Interface.Models;
 
 public partial class DataPointModel
 {
@@ -19,6 +21,7 @@ public partial class DataPointModel
     public DateTime Timestamp { get; set; }
 
     public double? Speed { get; set; }
-
-    public virtual RouteModel RouteModel { get; set; } = null!;
+    
+    [JsonIgnore]
+    public virtual RouteModel? RouteModel { get; set; } = null!;
 }

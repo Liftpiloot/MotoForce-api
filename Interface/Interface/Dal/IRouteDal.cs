@@ -4,6 +4,6 @@ namespace Interface.Interface.Dal;
 
 public interface IRouteDal
 {
-    public Task<int> CreateRoute(RouteModel route);
+    public Task<int> CreateRoute(int userId);
     public Task CreateDataPoint(DataPointModel[] dataPoints);
 }
