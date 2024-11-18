@@ -9,4 +9,5 @@ public interface IRouteDal
     public Task<double> GetMaxSpeed(int routeId);
     public Task<double> GetMaxLean(int routeId);
     public Task<double> GetMaxG(int routeId);
+    public Task<RouteModel> GetRoute(int routeId);
 }

@@ -30,4 +30,9 @@ public class RouteHandler(IRouteDal routeDal) : IRouteHandler
     {
         return await routeDal.GetMaxG(routeId);
     }
+
+    public async Task<RouteModel> GetRoute(int routeId)
+    {
+        return await routeDal.GetRoute(routeId);
+    }
 }

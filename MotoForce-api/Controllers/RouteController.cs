@@ -29,6 +29,20 @@ public class RouteController(ILogicFactoryBuilder logicFactoryBuilder) : Control
         }
     }
     
+    [HttpGet]
+    [Route("")]
+    public async Task<IActionResult> GetRoute(int routeId)
+    {
+        try
+        {
+            return Ok(new {Route = await _routeHandler.GetRoute(routeId)});
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500);
+        }
+    }
+    
     [HttpPost]
     [Route("postDataPoints")]
     public async Task<IActionResult> PostDataPoint(DataPointModel[] dataPoints)
