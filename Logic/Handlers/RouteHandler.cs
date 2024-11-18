@@ -25,4 +25,9 @@ public class RouteHandler(IRouteDal routeDal) : IRouteHandler
     {
         return await routeDal.GetMaxLean(routeId);
     }
+
+    public async Task<double> GetMaxG(int routeId)
+    {
+        return await routeDal.GetMaxG(routeId);
+    }
 }

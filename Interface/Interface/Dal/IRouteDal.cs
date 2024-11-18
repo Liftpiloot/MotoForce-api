@@ -8,4 +8,5 @@ public interface IRouteDal
     public Task CreateDataPoint(DataPointModel[] dataPoints);
     public Task<double> GetMaxSpeed(int routeId);
     public Task<double> GetMaxLean(int routeId);
+    public Task<double> GetMaxG(int routeId);
 }
