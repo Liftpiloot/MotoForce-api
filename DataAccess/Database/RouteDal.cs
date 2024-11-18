@@ -45,4 +45,14 @@ public class RouteDal(MyDbContext context) : IRouteDal
         }
         return (double)route.DataPoints.Max(dp => dp.Speed);
     }
+
+    public async Task<double> GetMaxLean(int routeId)
+    {
+        var route = await context.Routes.Include(r => r.DataPoints).FirstOrDefaultAsync(r => r.Id == routeId);
+        if (route == null)
+        {
+            throw new Exception("Route not found");
+        }
+        return (double)route.DataPoints.Max(dp => dp.Lean);
+    }
 }

@@ -57,4 +57,18 @@ public class RouteController(ILogicFactoryBuilder logicFactoryBuilder) : Control
             return StatusCode(500);
         }
     }
+    
+    [HttpGet]
+    [Route("Maxlean")]
+    public async Task<IActionResult> GetMaxLean(int routeId)
+    {
+        try
+        {
+            return Ok(new {MaxLean = await _routeHandler.GetMaxLean(routeId)});
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500);
+        }
+    }
 }
