@@ -1,6 +1,7 @@
 using DataAccess.Context;
 using Interface.Interface.Dal;
 using Interface.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Database;
 
@@ -33,5 +34,15 @@ public class RouteDal(MyDbContext context) : IRouteDal
         dataPoints.ToList().ForEach(x => x.RouteModel = route);
         context.DataPoints.AddRange(dataPoints);
         await context.SaveChangesAsync();
+    }
+
+    public async Task<double> GetMaxSpeed(int routeId)
+    {
+        var route = await context.Routes.Include(r => r.DataPoints).FirstOrDefaultAsync(r => r.Id == routeId);
+        if (route == null)
+        {
+            throw new Exception("Route not found");
+        }
+        return (double)route.DataPoints.Max(dp => dp.Speed);
     }
 }

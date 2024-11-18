@@ -6,4 +6,5 @@ public interface IRouteDal
 {
     public Task<int> CreateRoute(int userId);
     public Task CreateDataPoint(DataPointModel[] dataPoints);
+    public Task<double> GetMaxSpeed(int routeId);
 }

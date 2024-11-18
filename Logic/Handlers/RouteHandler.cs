@@ -15,4 +15,9 @@ public class RouteHandler(IRouteDal routeDal) : IRouteHandler
     {
         await routeDal.CreateDataPoint(dataPoints);
     }
+
+    public async Task<double> GetMaxSpeed(int routeId)
+    {
+        return await routeDal.GetMaxSpeed(routeId);
+    }
 }

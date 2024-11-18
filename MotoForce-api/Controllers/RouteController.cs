@@ -43,4 +43,18 @@ public class RouteController(ILogicFactoryBuilder logicFactoryBuilder) : Control
             return StatusCode(500);
         }
     }
+    
+    [HttpGet]
+    [Route("MaxSpeed")]
+    public async Task<IActionResult> GetMaxSpeed(int routeId)
+    {
+        try
+        {
+            return Ok(new {MaxSpeed = await _routeHandler.GetMaxSpeed(routeId)});
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500);
+        }
+    }
 }
