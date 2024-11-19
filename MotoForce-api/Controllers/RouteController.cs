@@ -101,7 +101,11 @@ public class RouteController(ILogicFactoryBuilder logicFactoryBuilder) : Control
     {
         try
         {
-            return Ok(new {MaxLean = await _routeHandler.GetMaxLean(routeId)});
+            var maxLean = await _routeHandler.GetMaxLean(routeId);
+            var route = await _routeHandler.GetRoute(routeId);
+            var highScore = await _userHandler.GetMaxLean(route.UserId);
+            
+            return Ok(new {MaxLean = maxLean, HighScore = highScore});
         }
         catch (Exception e)
         {
@@ -115,7 +119,11 @@ public class RouteController(ILogicFactoryBuilder logicFactoryBuilder) : Control
     {
         try
         {
-            return Ok(new {MaxG = await _routeHandler.GetMaxG(routeId)});
+            var maxG = await _routeHandler.GetMaxG(routeId);
+            var route = await _routeHandler.GetRoute(routeId);
+            var highScore = await _userHandler.GetMaxG(route.UserId);
+
+            return Ok(new { MaxG = maxG, HighScore = highScore });
         }
         catch (Exception e)
         {

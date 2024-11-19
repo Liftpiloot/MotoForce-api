@@ -32,4 +32,14 @@ public class UserHandler(IUserDal userDal) : IUserHandler
     {
         return await userDal.GetMaxSpeed(userId);
     }
+
+    public async Task<double> GetMaxLean(int userId)
+    {
+        return await userDal.GetMaxLean(userId);
+    }
+
+    public async Task<double> GetMaxG(int userId)
+    {
+        return await userDal.GetMaxG(userId);
+    }
 }

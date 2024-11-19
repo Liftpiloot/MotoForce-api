@@ -50,4 +50,34 @@ public class UserDal(MyDbContext context) : IUserDal
         }
         return (double)allDataPoints.Max(dp => dp.Speed);
     }
+
+    public async Task<double> GetMaxLean(int userId)
+    {
+        var allRoutes = await context.Routes.Include(r => r.DataPoints).Where(r => r.UserId == userId).ToListAsync();
+        if (allRoutes.Count == 0)
+        {
+            throw new Exception("No routes found");
+        }
+        var allDataPoints = allRoutes.SelectMany(r => r.DataPoints).ToList();
+        if (allDataPoints.Count == 0)
+        {
+            throw new Exception("No data points found");
+        }
+        return (double)allDataPoints.Max(dp => dp.Lean);
+    }
+
+    public async Task<double> GetMaxG(int userId)
+    { 
+        var allRoutes = await context.Routes.Include(r => r.DataPoints).Where(r => r.UserId == userId).ToListAsync();
+        if (allRoutes.Count == 0)
+        {
+            throw new Exception("No routes found");
+        }
+        var allDataPoints = allRoutes.SelectMany(r => r.DataPoints).ToList();
+        if (allDataPoints.Count == 0)
+        {
+            throw new Exception("No data points found");
+        }
+        return double.Max((double)allDataPoints.Max(dp => dp.LateralG), (double)allDataPoints.Max(dp => dp.Acceleration));
+    }
 }
