@@ -43,6 +43,21 @@ public class RouteController(ILogicFactoryBuilder logicFactoryBuilder) : Control
         }
     }
     
+    [HttpDelete]
+    [Route("")]
+    public async Task<IActionResult> DeleteRoute(int routeId)
+    {
+        try
+        {
+            await _routeHandler.DeleteRoute(routeId);
+            return Ok();
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500);
+        }
+    }
+    
     [HttpPost]
     [Route("postDataPoints")]
     public async Task<IActionResult> PostDataPoint(DataPointModel[] dataPoints)

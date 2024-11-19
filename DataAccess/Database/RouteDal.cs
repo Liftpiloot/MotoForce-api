@@ -78,4 +78,15 @@ public class RouteDal(MyDbContext context) : IRouteDal
         }
         return route;
     }
+
+    public async Task DeleteRoute(int routeId)
+    {
+        var route = await context.Routes.FindAsync(routeId);
+        if (route == null)
+        {
+            throw new Exception("Route not found");
+        }
+        context.Routes.Remove(route);
+        await context.SaveChangesAsync();
+    }
 }

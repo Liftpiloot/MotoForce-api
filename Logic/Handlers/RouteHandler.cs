@@ -35,4 +35,9 @@ public class RouteHandler(IRouteDal routeDal) : IRouteHandler
     {
         return await routeDal.GetRoute(routeId);
     }
+
+    public async Task DeleteRoute(int routeId)
+    {
+        await routeDal.DeleteRoute(routeId);
+    }
 }
