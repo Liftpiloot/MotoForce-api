@@ -40,6 +40,7 @@ public class UserHandlerTests
         Assert.AreEqual(userModel, result);
     }
     
+    
     [TestMethod]
     public async Task Login_ShouldReturnNull_WhenUserDoesNotExist()
     {
