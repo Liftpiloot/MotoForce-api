@@ -53,5 +53,52 @@ public class UserHandlerTests
         // Assert
         Assert.IsNull(result);
     }
+    
+    [TestMethod]
+    public async Task MaxSpeed_ShouldReturnMaxSpeed_WhenUserExists()
+    {
+        // Arrange
+        var userId = 1;
+        var maxSpeed = 100.0;
 
+        _userDal.Setup(x => x.GetMaxSpeed(It.IsAny<int>())).ReturnsAsync(maxSpeed);
+
+        // Act
+        var result = await _userHandler.GetMaxSpeed(userId);
+
+        // Assert
+        Assert.AreEqual(maxSpeed, result);
+    }
+    
+    [TestMethod]
+    public async Task MaxLean_ShouldReturnMaxLean_WhenUserExists()
+    {
+        // Arrange
+        var userId = 1;
+        var maxLean = 100.0;
+
+        _userDal.Setup(x => x.GetMaxLean(It.IsAny<int>())).ReturnsAsync(maxLean);
+
+        // Act
+        var result = await _userHandler.GetMaxLean(userId);
+
+        // Assert
+        Assert.AreEqual(maxLean, result);
+    }
+    
+    [TestMethod]
+    public async Task MaxG_ShouldReturnMaxG_WhenUserExists()
+    {
+        // Arrange
+        var userId = 1;
+        var maxG = 100.0;
+
+        _userDal.Setup(x => x.GetMaxG(It.IsAny<int>())).ReturnsAsync(maxG);
+
+        // Act
+        var result = await _userHandler.GetMaxG(userId);
+
+        // Assert
+        Assert.AreEqual(maxG, result);
+    }
 }
