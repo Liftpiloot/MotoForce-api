@@ -9,4 +9,5 @@ public interface IUserDal
     public bool UserNameExists(string userName);
     public bool EmailExists(string email);
     public Task<UserModel?> Login(string identifier);
+    public Task<double> GetMaxSpeed(int userId);
 }

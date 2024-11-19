@@ -8,4 +8,5 @@ public interface IUserHandler
     public List<UserModel> GetUsers();
     public void Register(UserModel userModel);
     public Task<UserModel?> Login(string identifier);
+    public Task<double> GetMaxSpeed(int userId);
 }

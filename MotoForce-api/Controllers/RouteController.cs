@@ -1,5 +1,7 @@
 using Interface.Factories;
+using Interface.Interface.Handlers;
 using Interface.Models;
+using Logic.Handlers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using IRouteHandler = Interface.Interface.Handlers.IRouteHandler;
@@ -12,6 +14,8 @@ public class RouteController(ILogicFactoryBuilder logicFactoryBuilder) : Control
 {
     private readonly IRouteHandler _routeHandler =
         logicFactoryBuilder.BuildHandlerFactory().GetRouteHandler();
+    private readonly IUserHandler _userHandler =
+        logicFactoryBuilder.BuildHandlerFactory().GetUserHandler();
     
     
     [HttpPost]
@@ -79,7 +83,11 @@ public class RouteController(ILogicFactoryBuilder logicFactoryBuilder) : Control
     {
         try
         {
-            return Ok(new {MaxSpeed = await _routeHandler.GetMaxSpeed(routeId)});
+            var maxSpeed = await _routeHandler.GetMaxSpeed(routeId);
+            var route = await _routeHandler.GetRoute(routeId);
+            var highScore = await _userHandler.GetMaxSpeed(route.UserId);
+            
+            return Ok(new {MaxSpeed = maxSpeed, HighScore = highScore});
         }
         catch (Exception e)
         {

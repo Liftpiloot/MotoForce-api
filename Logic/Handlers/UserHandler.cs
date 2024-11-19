@@ -27,4 +27,9 @@ public class UserHandler(IUserDal userDal) : IUserHandler
     {
         return await userDal.Login(identifier);
     }
+
+    public async Task<double> GetMaxSpeed(int userId)
+    {
+        return await userDal.GetMaxSpeed(userId);
+    }
 }
