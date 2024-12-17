@@ -81,4 +81,21 @@ public class UserController(ILogicFactoryBuilder logicFactoryBuilder) : Controll
         }
     }
     
+    
+    // get most recent route
+    [HttpGet]
+    [Route("/GetRoutes")]
+    public async Task<IActionResult> GetRoutes(int userId, int count)
+    {
+        try
+        {
+            List<RouteModel> routes = await _userHandler.GetRoutes(userId, count);
+            return Ok(routes);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, new { message = e.Message });
+        }
+    }
+    
 }

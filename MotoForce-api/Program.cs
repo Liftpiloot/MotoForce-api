@@ -1,8 +1,10 @@
-﻿using DataAccess.Context;
+﻿using System.Net;
+using DataAccess.Context;
 using DataAccess.Factories;
 using Interface.Factories;
 using Logic.Factories;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +13,11 @@ using Microsoft.Extensions.Logging;
 
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.Listen(IPAddress.Any, 8080);
+});
 
 // Add services to the container.
 builder.Services.AddHttpClient();

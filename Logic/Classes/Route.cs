@@ -10,7 +10,7 @@ public class Route
 
     public double Distance { get; set; }
 
-    public List<DataPoint> DataPoints { get; set; } = new();
+    public List<DataPoint> DataPoints { get; set; }
 
     public User User { get; set; } = null!;
     

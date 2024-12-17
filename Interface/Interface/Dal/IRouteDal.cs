@@ -11,4 +11,9 @@ public interface IRouteDal
     public Task<double> GetMaxG(int routeId);
     public Task<RouteModel> GetRoute(int routeId);
     public Task DeleteRoute(int routeId);
+    public Task CalculateSpeed(int routeId);
+    public Task CalculateLean(int routeId);
+    public Task CalculateG(int routeId);
+    public Task CalculateAccelerationG(int routeId);
+    public Task CalculateDistance(int routeId);
 }

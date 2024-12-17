@@ -42,4 +42,9 @@ public class UserHandler(IUserDal userDal) : IUserHandler
     {
         return await userDal.GetMaxG(userId);
     }
+
+    public Task<List<RouteModel>> GetRoutes(int userId, int count)
+    {
+        return userDal.GetRoutes(userId, count);
+    }
 }

@@ -80,4 +80,14 @@ public class UserDal(MyDbContext context) : IUserDal
         }
         return double.Max((double)allDataPoints.Max(dp => dp.LateralG), (double)allDataPoints.Max(dp => dp.Acceleration));
     }
+
+    public async Task<List<RouteModel>> GetRoutes(int userId, int count)
+    {
+        var routes = await context.Routes.Include(r => r.DataPoints).Where(r => r.UserId == userId).OrderByDescending(r => r.Id).Take(count).ToListAsync(); 
+        if (routes.Count == 0)
+        {
+            throw new Exception("No routes found");
+        }
+        return routes;
+    }
 }

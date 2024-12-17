@@ -12,4 +12,5 @@ public interface IUserDal
     public Task<double> GetMaxSpeed(int userId);
     public Task<double> GetMaxLean(int userId);
     public Task<double> GetMaxG(int userId);
+    public Task<List<RouteModel>> GetRoutes(int userId, int count);
 }

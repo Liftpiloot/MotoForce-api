@@ -40,4 +40,13 @@ public class RouteHandler(IRouteDal routeDal) : IRouteHandler
     {
         await routeDal.DeleteRoute(routeId);
     }
+    
+    public async Task CalculateRouteStats(int routeId)
+    {
+        await routeDal.CalculateSpeed(routeId);
+        await routeDal.CalculateLean(routeId);
+        await routeDal.CalculateG(routeId);
+        await routeDal.CalculateAccelerationG(routeId);
+        await routeDal.CalculateDistance(routeId);
+    }
 }

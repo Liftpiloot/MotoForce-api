@@ -39,6 +39,11 @@ public class RouteController(ILogicFactoryBuilder logicFactoryBuilder) : Control
     {
         try
         {
+            RouteModel route = await _routeHandler.GetRoute(routeId);
+            if (route.Distance < 0.01 && route.DataPoints.Count > 0)
+            {
+                await _routeHandler.CalculateRouteStats(routeId);
+            }
             return Ok(new {Route = await _routeHandler.GetRoute(routeId)});
         }
         catch (Exception e)

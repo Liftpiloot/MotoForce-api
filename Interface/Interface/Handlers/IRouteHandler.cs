@@ -11,4 +11,5 @@ public interface IRouteHandler
     public Task<double> GetMaxG(int routeId);
     public Task<RouteModel> GetRoute(int routeId);
     public Task DeleteRoute(int routeId);
+    public Task CalculateRouteStats(int routeId);
 }
