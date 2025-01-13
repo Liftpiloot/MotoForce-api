@@ -90,4 +90,89 @@ public class UserDal(MyDbContext context) : IUserDal
         }
         return routes;
     }
+
+    public async Task<List<UserModel>> GetFriends(int userId)
+    {
+        var userSendRequest = await context.Friends.Where(f => f.SenderId == userId && f.Accepted).Select(f => f.ReceiverId).ToListAsync();
+        var userReceiveRequest = await context.Friends.Where(f => f.ReceiverId == userId && f.Accepted).Select(f => f.SenderId).ToListAsync();
+        var friends = await context.Users.Where(u => userSendRequest.Contains(u.Id) || userReceiveRequest.Contains(u.Id)).ToListAsync();
+        return friends;
+    }
+
+    public async Task AddFriend(int userId, string email)
+    {
+        var user = await context.Users.FirstOrDefaultAsync(u => u.Email == email);
+        if (user == null)
+        {
+            throw new Exception("User not found");
+        }
+        var friend = new FriendModel
+        {
+            SenderId = userId,
+            ReceiverId = user.Id,
+            Accepted = false,
+            CreatedAt = DateTime.Now
+        };
+        context.Friends.Add(friend);
+        await context.SaveChangesAsync();
+    }
+
+    public async Task AcceptFriend(int friendId)
+    {
+        var friend = await context.Friends.FirstOrDefaultAsync(f => f.Id == friendId);
+        if (friend == null)
+        {
+            throw new Exception("Friend request not found");
+        }
+        friend.Accepted = true;
+        await context.SaveChangesAsync();
+    }
+
+    public async Task<List<FriendModel>> GetFriendRequests(int userId)
+    {
+        var friendRequests = await context.Friends.Where(f => f.ReceiverId == userId && !f.Accepted).ToListAsync();
+        return friendRequests;
+    }
+
+    public async Task<UserModel> GetUser(int userId)
+    {
+        UserModel user = await context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+        if (user == null)
+        {
+            throw new Exception("User not found");
+        }
+        return user;
+    }
+
+    public async Task<UserModel> getUserByEmail(string email)
+    {
+        UserModel user = await context.Users.FirstOrDefaultAsync(u => u.Email == email);
+        if (user == null)
+        {
+            throw new Exception("User not found");
+        }
+        return user;
+    }
+
+    public async Task DenyFriend(int friendId)
+    {
+        var friend = await context.Friends.FirstOrDefaultAsync(f => f.Id == friendId);
+        if (friend == null)
+        {
+            throw new Exception("Friend request not found");
+        }
+        context.Friends.Remove(friend);
+        await context.SaveChangesAsync();
+    }
+
+    public async Task RemoveFriend(int userId, int friendId)
+    {
+        var friend = await context.Friends.FirstOrDefaultAsync(f => f.SenderId == userId && f.ReceiverId == friendId || f.SenderId == friendId && f.ReceiverId == userId);
+        if (friend == null)
+        {
+            throw new Exception("Friend not found");
+        }
+        context.Friends.Remove(friend);
+        await context.SaveChangesAsync();
+    }
 }

@@ -48,7 +48,7 @@ namespace DataAccess.Migrations
                     b.Property<int>("RouteId")
                         .HasColumnType("int");
 
-                    b.Property<int>("RouteModelId")
+                    b.Property<int?>("RouteModelId")
                         .HasColumnType("int");
 
                     b.Property<double?>("Speed")
@@ -62,6 +62,35 @@ namespace DataAccess.Migrations
                     b.HasIndex("RouteModelId");
 
                     b.ToTable("DataPoints");
+                });
+
+            modelBuilder.Entity("Interface.Models.FriendModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Accepted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ReceiverId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SenderId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReceiverId");
+
+                    b.HasIndex("SenderId");
+
+                    b.ToTable("Friends");
                 });
 
             modelBuilder.Entity("Interface.Models.RouteModel", b =>
@@ -120,11 +149,28 @@ namespace DataAccess.Migrations
                 {
                     b.HasOne("Interface.Models.RouteModel", "RouteModel")
                         .WithMany("DataPoints")
-                        .HasForeignKey("RouteModelId")
+                        .HasForeignKey("RouteModelId");
+
+                    b.Navigation("RouteModel");
+                });
+
+            modelBuilder.Entity("Interface.Models.FriendModel", b =>
+                {
+                    b.HasOne("Interface.Models.UserModel", "Receiver")
+                        .WithMany()
+                        .HasForeignKey("ReceiverId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("RouteModel");
+                    b.HasOne("Interface.Models.UserModel", "Sender")
+                        .WithMany()
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Receiver");
+
+                    b.Navigation("Sender");
                 });
 
             modelBuilder.Entity("Interface.Models.RouteModel", b =>

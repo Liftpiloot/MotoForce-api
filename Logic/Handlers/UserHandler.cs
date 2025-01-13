@@ -7,9 +7,9 @@ namespace Logic.Handlers;
 
 public class UserHandler(IUserDal userDal) : IUserHandler
 {
-    public UserModel GetUser()
+    public async Task<UserModel> GetUser(int userId)
     {
-        throw new NotImplementedException();
+        return await userDal.GetUser(userId);
     }
 
     public List<UserModel> GetUsers()
@@ -46,5 +46,40 @@ public class UserHandler(IUserDal userDal) : IUserHandler
     public Task<List<RouteModel>> GetRoutes(int userId, int count)
     {
         return userDal.GetRoutes(userId, count);
+    }
+
+    public async Task<List<UserModel>> GetFriends(int userId)
+    {
+        return await userDal.GetFriends(userId);
+    }
+
+    public async Task AddFriend(int userId, string email)
+    {
+        await userDal.AddFriend(userId, email);
+    }
+
+    public async Task AcceptFriend(int friendId)
+    {
+        await userDal.AcceptFriend(friendId);
+    }
+
+    public async Task<List<FriendModel>> GetFriendRequests(int userId)
+    {
+        return await userDal.GetFriendRequests(userId);
+    }
+
+    public async Task<UserModel> getUserByEmail(string email)
+    {
+        return await userDal.getUserByEmail(email);
+    }
+
+    public async Task DenyFriend(int friendId)
+    {
+        await userDal.DenyFriend(friendId);
+    }
+
+    public async Task RemoveFriend(int userId, int friendId)
+    {
+        await userDal.RemoveFriend(userId, friendId);
     }
 }
