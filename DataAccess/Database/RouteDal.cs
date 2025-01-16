@@ -101,9 +101,9 @@ public class RouteDal(MyDbContext context) : IRouteDal
     {
         var route = await GetRoute(routeId);
         var dataPoints = route.DataPoints;
-        if (dataPoints.Count == 0)
+        if (dataPoints.Count < 2)
         {
-            throw new Exception("No data points found");
+            throw new Exception("Not enough data points found");
         }
 
         for (int i = 0; i < dataPoints.Count - 1; i++)
