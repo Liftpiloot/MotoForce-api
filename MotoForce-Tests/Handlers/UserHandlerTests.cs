@@ -101,4 +101,58 @@ public class UserHandlerTests
         // Assert
         Assert.AreEqual(maxG, result);
     }
+
+    [TestMethod]
+    public async Task GetFriends_ShouldReturnFriends_WhenFriendsExist()
+    {
+        // Arrange
+        var userId = 1;
+        var friends = new List<UserModel>
+        {
+            new UserModel
+            {
+                Id = 2,
+                Name = "Jane Doe"
+            }
+        };
+
+        _userDal.Setup(x => x.GetFriends(It.IsAny<int>())).ReturnsAsync(friends);
+
+        // Act
+        var result = await _userHandler.GetFriends(userId);
+
+        // Assert
+        Assert.AreEqual(friends, result);
+    }
+
+    [TestMethod]
+    public async Task GetFriends_ShouldReturnEmptyList_WhenFriendsDoNotExist()
+    {
+        // Arrange
+        var userId = 1;
+        var friends = new List<UserModel>();
+
+        _userDal.Setup(x => x.GetFriends(It.IsAny<int>())).ReturnsAsync(friends);
+
+        // Act
+        var result = await _userHandler.GetFriends(userId);
+
+        // Assert
+        Assert.AreEqual(friends, result);
+    }
+
+    [TestMethod]
+    public async Task AddFriend_ShouldCallDal_WhenUserExists()
+    {
+        // Arrange
+        var userId = 1;
+        var email = "TestFriend@test.nl";
+        
+        // Act
+        await _userHandler.AddFriend(userId, email);
+
+        // Assert
+        _userDal.Verify(x => x.AddFriend(userId, email), Times.Once);
+    }
+    
 }
