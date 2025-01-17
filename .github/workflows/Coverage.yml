@@ -1,0 +1,41 @@
+name: Code Coverage
+
+on: [push, pull_request]
+
+jobs: 
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '7.0.x'
+
+    - name: Install dependencies
+      run: dotnet restore
+
+    - name: Build the solution
+      run: dotnet build --no-restore
+
+    - name: Run tests with coverage
+      run: dotnet test --no-build --collect:"XPlat Code Coverage" --filter "FullyQualifiedName~Logic.Handlers"
+
+    - name: Report code coverage
+      run: |
+        reportgenerator -reports:**/coverage.cobertura.xml -targetdir:coverage -reporttypes:Html
+        cat coverage/index.html
+
+    - name: Check code coverage
+      run: |
+        coverage=$(reportgenerator -reports:**/coverage.cobertura.xml -targetdir:coverage -reporttypes:TextSummary | grep -oP 'Line coverage: \K[0-9]+')
+        echo "Code coverage is $coverage%"
+        if [ $coverage -lt 80 ]; then
+          echo "Code coverage is below 80%"
+          exit 1
+        fi
+      shell: bash
+    
