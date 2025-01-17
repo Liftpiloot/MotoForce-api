@@ -24,6 +24,9 @@ jobs:
     - name: Run tests with coverage
       run: dotnet test --no-build --collect:"XPlat Code Coverage" --filter "FullyQualifiedName~Logic.Handlers"
 
+    - name: Install ReportGenerator
+      run: dotnet tool install --global dotnet-reportgenerator-globaltool
+      
     - name: Report code coverage
       run: |
         reportgenerator -reports:**/coverage.cobertura.xml -targetdir:coverage -reporttypes:Html
