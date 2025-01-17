@@ -124,6 +124,22 @@ public class UserHandlerTests
     }
 
     [TestMethod]
+    public async Task GetFriends_ShouldReturnEmptyList_WhenFriendsDoNotExist()
+    {
+        // Arrange
+        var userId = 1;
+        var friends = new List<UserModel>();
+
+        _userDal.Setup(x => x.GetFriends(It.IsAny<int>())).ReturnsAsync(friends);
+
+        // Act
+        var result = await _userHandler.GetFriends(userId);
+
+        // Assert
+        Assert.AreEqual(friends, result);
+    }
+
+    [TestMethod]
     public async Task AddFriend_ShouldCallDal_WhenUserExists()
     {
         // Arrange
@@ -136,5 +152,4 @@ public class UserHandlerTests
         // Assert
         _userDal.Verify(x => x.AddFriend(userId, email), Times.Once);
     }
-    
 }
