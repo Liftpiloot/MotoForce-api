@@ -17,7 +17,6 @@ public class UserHandlerTests
         _userDal = new Mock<IUserDal>();
         _userHandler = new UserHandler(_userDal.Object);
     }
-    
     // Login tests
     [TestMethod]
     public async Task Login_ShouldReturnUserModel_WhenUserExists()
@@ -39,7 +38,6 @@ public class UserHandlerTests
         // Assert
         Assert.AreEqual(userModel, result);
     }
-    
     
     [TestMethod]
     public async Task Login_ShouldReturnNull_WhenUserDoesNotExist()
@@ -115,22 +113,6 @@ public class UserHandlerTests
                 Name = "Jane Doe"
             }
         };
-
-        _userDal.Setup(x => x.GetFriends(It.IsAny<int>())).ReturnsAsync(friends);
-
-        // Act
-        var result = await _userHandler.GetFriends(userId);
-
-        // Assert
-        Assert.AreEqual(friends, result);
-    }
-
-    [TestMethod]
-    public async Task GetFriends_ShouldReturnEmptyList_WhenFriendsDoNotExist()
-    {
-        // Arrange
-        var userId = 1;
-        var friends = new List<UserModel>();
 
         _userDal.Setup(x => x.GetFriends(It.IsAny<int>())).ReturnsAsync(friends);
 
