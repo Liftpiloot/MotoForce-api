@@ -2,7 +2,7 @@ name: Code Coverage
 
 on: [push, pull_request]
 
-jobs: 
+jobs:
   build:
     runs-on: ubuntu-latest
 
@@ -26,10 +26,14 @@ jobs:
 
     - name: Install ReportGenerator
       run: dotnet tool install --global dotnet-reportgenerator-globaltool
-      
-    - name: Report code coverage
-      run: |
-        reportgenerator -reports:**/coverage.cobertura.xml -targetdir:coverage -reporttypes:Html,TextSummary
+
+    - name: Report code coverage (HTML)
+      run: reportgenerator -reports:**/coverage.cobertura.xml -targetdir:coverage -reporttypes:Html
+      env:
+        PATH: /home/runner/.dotnet/tools:$PATH
+
+    - name: Report code coverage (TextSummary)
+      run: reportgenerator -reports:**/coverage.cobertura.xml -targetdir:coverage -reporttypes:TextSummary
       env:
         PATH: /home/runner/.dotnet/tools:$PATH
 
@@ -50,4 +54,3 @@ jobs:
       with:
         name: coverage-report
         path: coverage
-    
